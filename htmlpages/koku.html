@@ -1,51 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 </head>
 
 <body>
-    <header>
-        <input type="checkbox" name="" id="chk1">
-        <div class="logo">
-          <a href="../index.html">
-            <h1>Mustafa Kutlu</h1>
-          </a>
-        </div>
-        <div class="search-box">
-          <form action="">
-            <input type="text" name="search" id="srch" placeholder="Search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-          </form>
-        </div>
-        <ul>
-          <li><a href="./eserleri.html">Eserleri</a></li>
-          <li><a href="./kitap-galerisi.html">Kitap Galerisi</a></li>
-          <li class="kokuIndex"><a href="./koku.html">Eserlerindeki Koku</a></li>
-          <li><a href="./YazarHakkında.html">Yazar Hakkında</a></li>
-          <!-- <li><a href="product.html">Product</a></li>
+  <header>
+    <input type="checkbox" name="" id="chk1">
+    <div class="logo">
+      <a href="../index.html">
+        <h1>Mustafa Kutlu</h1>
+      </a>
+    </div>
+    <div class="search-box">
+      <form action="">
+        <input type="text" name="search" id="srch" placeholder="Search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <ul>
+      <li><a href="./eserleri.html">Eserleri</a></li>
+      <li><a href="./kitap-galerisi.html">Kitap Galerisi</a></li>
+      <li class="kokuIndex"><a href="./koku.html">Eserlerindeki Koku</a></li>
+      <li><a href="./YazarHakkında.html">Yazar Hakkında</a></li>
+      <!-- <li><a href="product.html">Product</a></li>
               <li><a href="/test/blog.html">Blog</a></li> -->
-          <!-- <li><a href="#">Eserler</a></li> -->
-    
-        </ul>
-        <div class="menu">
-          <label for="chk1">
-            <i class="fa fa-bars"></i>
-          </label>
-        </div>
-      </header>
+      <!-- <li><a href="#">Eserler</a></li> -->
 
-    <div class="m-3">
+    </ul>
+    <div class="menu">
+      <label for="chk1">
+        <i class="fa fa-bars"></i>
+      </label>
+    </div>
+  </header>
+
+  <div class="p-5 m-3   rounded-md  ">
+
+    <!-- Kİtap Başlığı -->
+    <h2 class="text-center bg-slate-200 py-2 mb-2 rounded-md"><i>></i> KİTAP 1</h2>
+
+    <!-- koku alanı -->
+    <div class="  grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+
+
+
+      <!-- Koku 17 -->
+      <div class="overflow-hidden rounded-lg shadow-md bg-slate-100 text-center  grid grid-cols-1 sm:grid-cols-2">
+        <img src="../fotolar/kokular/ya tahammül ya sefer/27-güneş doğarken iğde.jpg" alt="beyhude-ömrüm"
+          class="w-36 p-1 object-cover mx-auto  col-span-2">
+
+
+        <h6 class="p-2 col-span-2 self-end">27. Sayfada İğde Kokusu vardır. </h6>
+
+      </div>
+
+      <!-- Koku 28 -->
+      <div class="overflow-hidden rounded-lg shadow-md bg-slate-100 text-center  grid grid-cols-1 sm:grid-cols-2">
+
+        <img src="../fotolar/kokular/ya tahammül ya sefer/28-Meyve.png" alt="beyhude-ömrüm"
+          class="w-36 p-1 object-cover mx-auto ">
+
+        <img src="../fotolar/kokular/ya tahammül ya sefer/28-Yaprak.png" alt="beyhude-ömrüm"
+          class="w-36 p-1 object-cover mx-auto ">
+
+        <h6 class="p-2 col-span-2 self-end">28. Sayfada İğde Kokusu vardır. </h6>
+      </div>
+
+      <!-- Koku 30 -->
+      <div class="overflow-hidden rounded-lg shadow-md bg-slate-100 text-center  grid grid-cols-1 sm:grid-cols-2">
+        <img src="../fotolar/kokular/ya tahammül ya sefer/30-gece.jpg" alt="beyhude-ömrüm"
+          class="w-36 p-1 object-cover mx-auto col-span-2 ">
+
+        <h6 class="p-2 col-span-2 self-end">30. Sayfada İğde Kokusu vardır. </h6>
+      </div>
+
+      <!-- Koku 33 -->
+      <div class="overflow-hidden rounded-lg shadow-md bg-slate-100 text-center  grid grid-cols-1 sm:grid-cols-2">
+        <img src="../fotolar/kokular/ya tahammül ya sefer/33-kekik.jpg" alt="beyhude-ömrüm"
+          class="w-36 p-1 object-cover mx-auto col-span-2 ">
+
+        <h6 class="p-2 col-span-2 self-end">33. Sayfada İğde Kokusu vardır. </h6>
+      </div>
+
+      <!-- Koku 37 -->
+      <div class="overflow-hidden rounded-lg shadow-md bg-slate-100 text-center  grid grid-cols-1 sm:grid-cols-2">
+        <img src="../fotolar/kokular/ya tahammül ya sefer/37-lavantalı çarşaf.jpg" alt="beyhude-ömrüm"
+          class="w-36 p-1 object-cover mx-auto col-span-2 ">
+
+        <h6 class="p-2 col-span-2 self-end">37. Sayfada İğde Kokusu vardır. </h6>
+      </div>
+
+
+      <!-- Koku 100 -->
+      <div class="overflow-hidden rounded-lg shadow-md bg-slate-100 text-center  grid grid-cols-1 sm:grid-cols-2">
+        <img src="../fotolar/kokular/ya tahammül ya sefer/100-mantar.jpg" alt="beyhude-ömrüm"
+          class="w-36 p-1 object-cover mx-auto col-span-2 ">
+
+        <h6 class="p-2 col-span-2 self-end">100. Sayfada İğde Kokusu vardır. </h6>
+      </div>
+
+      <!-- Koku 101 -->
+      <div class="overflow-hidden rounded-lg shadow-md bg-slate-100 text-center  grid grid-cols-1 sm:grid-cols-2">
+        <img src="../fotolar/kokular/ya tahammül ya sefer/101-Çay.jpg" alt="beyhude-ömrüm"
+          class="w-36 p-1 object-cover mx-auto col-span-2 ">
+
+        <h6 class="p-2 col-span-2 self-end">101. Sayfada İğde Kokusu vardır. </h6>
+      </div>
+
+      <!-- Koku 112 -->
+      <div class="overflow-hidden rounded-lg shadow-md bg-slate-100 text-center  grid grid-cols-1 sm:grid-cols-2">
+        <img src="../fotolar/kokular/ya tahammül ya sefer/112-Çiriş.jpg" alt="beyhude-ömrüm"
+          class="w-36 p-1 object-cover mx-auto col-span-2 self-center">
+
+        <h6 class="p-2 col-span-2 self-end">112. Sayfada İğde Kokusu vardır. </h6>
+      </div>
+
+      <!-- Koku 123 -->
+      <div class="overflow-hidden rounded-lg shadow-md bg-slate-100 text-center  grid grid-cols-1 sm:grid-cols-2">
+        <img src="../fotolar/kokular/ya tahammül ya sefer/123-yarpuz.jpg" alt="beyhude-ömrüm"
+          class="w-36 p-1 object-cover mx-auto col-span-2 self-center">
+
+        <h6 class="p-2 col-span-2 self-end">123. Sayfada İğde Kokusu vardır. </h6>
+      </div>
+
 
     </div>
 
+  </div>
+  <br>
+
+    
+
+  </div>
+
+  <br>
+
 </body>
+
 </html>
