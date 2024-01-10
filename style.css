@@ -967,6 +967,7 @@ header .menu {
 .eser-paragraf {
 
   display: block;
+  text-align: justify;
   margin-block-start: 1em;
   margin-block-end: 1em;
   margin-inline-start: 0px;
