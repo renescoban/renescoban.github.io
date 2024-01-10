@@ -1,217 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Poppins:ital,wght@1,500&display=swap');
 
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: arial;
-}
-
-body {
-  background: url(bg.jpg);
-  background-size: cover;
-  height: 100vh;
-  background-position: center;
-  padding-top: 100px;
-}
-
-header {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  z-index: 99;
-  box-shadow: 0 0 10px #000;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-#chk1 {
-  display: none;
-}
-
-i {
-  color: #fff;
-  cursor: pointer;
-}
-
-header div a {
-  text-decoration: none;
-  color: #fff;
-}
-
-header .logo {
-  flex: 1;
-  color: #fff;
-  margin-left: 50px;
-  text-transform: uppercase;
-  font-size: 15px;
-}
-
-header .search-box {
-  flex: 1;
-  position: relative;
-}
-
-.search-box input {
-  width: 100%;
-  height: 40px;
-  border: none;
-  outline: none;
-  background: #f2f2f2;
-  border-radius: 30px;
-  color: gray;
-  font-size: 10px;
-  text-align: center;
-  padding-left: 5px;
-  padding-right: 40p;
-
-}
-
-.search-box button {
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  border-radius: 30px;
-  border: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: scale(0.9);
-  background: green;
-
-}
-
-header ul {
-  flex: 2;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-header ul li {
-  list-style: none;
-  text-align: center;
-  padding: 0px 10px;
-}
-
-header ul li a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 600;
-  text-transform: uppercase;
-  padding: 10px 0px;
-
-}
-
-header ul li a:hover {
-  border-bottom: 2px solid cadetblue;
-}
-
-header .menu {
-  font-size: 2.5em;
-  display: none;
-}
-
-@media(max-width:1000px) {
-  .search-box button {
-    position: absolute;
-  }
-
-  header ul {
-    position: fixed;
-    top: 100px;
-    right: -100%;
-    background: rgba(0, 0, 0, 0.5);
-    height: calc(100vh - 100px);
-    width: 50%;
-    flex-direction: column;
-    align-items: center;
-    transition: right 0.5s linear;
-  }
-
-  header .menu {
-    display: block;
-    width: 100px;
-    text-align: center;
-  }
-
-  #chk1:checked~ul {
-    right: 0;
-  }
-}
-
-@media(max-width:600px) {
-  header .logo {
-    font-size: 10px;
-    margin-left: 8px;
-  }
-
-  header ul {
-    width: 100%;
-  }
-}
-
-
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-/* Dropdown button */
-.dropdown .dropbtn {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 600;
-  text-transform: uppercase;
-  padding: 10px 15px;
-}
-
-/* Add a red background color to navbar links on hover */
-.navbar a:hover,
-.dropdown:hover .dropbtn {
-  border-bottom: 2px solid cadetblue;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-/* Add a grey background color to dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-
-
-
 /*
 ! tailwindcss v3.3.2 | MIT License | https://tailwindcss.com
 */
-
 
 
 *,
@@ -901,7 +692,7 @@ video {
 }
 
 body {
-  background: url(bg.jpg);
+  background: url(fotolar/bg2.jpg);
   background-size: cover;
   padding-top: 100px;
   height: 100vh;
@@ -978,6 +769,8 @@ header ul {
 
 header ul li {
   list-style: none;
+  text-align: center;
+  padding: 0px 10px;
 }
 
 header ul li a {
@@ -1027,7 +820,7 @@ header .menu {
 
 @media(max-width:600px) {
   header .logo {
-    font-size: 10px;
+    font-size: 13px;
     margin-left: 8px;
   }
 
