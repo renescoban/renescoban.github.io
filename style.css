@@ -697,6 +697,8 @@ body {
   padding-top: 100px;
   height: 100vh;
   background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 header {
