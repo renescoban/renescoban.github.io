@@ -1010,3 +1010,20 @@ header .menu {
   padding: 9px 0px;
   overflow: hidden;
 }
+
+#scrollToTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0056b3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+#scrollToTopBtn:hover {
+  background-color: #007bff;
+}
