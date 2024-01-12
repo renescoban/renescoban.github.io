@@ -1016,14 +1016,15 @@ header .menu {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #0056b3;
+  background-color: #8413b8;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   padding: 10px 15px;
   cursor: pointer;
+  opacity: 90%;
 }
 
 #scrollToTopBtn:hover {
-  background-color: #007bff;
+  background-color: #943bbd;
 }
