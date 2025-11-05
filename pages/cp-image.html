@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V1 Image Comparison Tool with Slider</title>
+    <title>Image Comparison Tool with Slider</title>
     <style>
         * {
             margin: 0;
@@ -411,10 +411,10 @@
                     </div>
                     <div class="comparison-container" id="comparisonContainer">
                         <div class="image-before comparison-image-wrapper">
-                            <img id="beforeImage" src="" alt="Before Image" crossorigin="anonymous">
+                            <img id="beforeImage" src="" alt="Before Image">
                         </div>
                         <div class="image-after comparison-image-wrapper">
-                            <img id="afterImage" src="" alt="After Image" crossorigin="anonymous">
+                            <img id="afterImage" src="" alt="After Image">
                         </div>
                         <div class="slider-handle" id="sliderHandle">
                             <div class="slider-button"></div>
@@ -435,11 +435,11 @@
         let selectedImages = [];
         let isDragging = false;
 
-        // Use CORS proxy service to bypass CORS restrictions
+        // Use separate proxy server to bypass CORS restrictions
         function getProxiedUrl(url) {
-            // Using a public CORS proxy service
-            const corsProxy = 'https://api.allorigins.win/raw?url=';
-            return corsProxy + url;
+            // Replace with your deployed proxy server URL
+            const proxyBaseUrl = 'https://product-image-comparison-production.up.railway.app'; // <-- UPDATE THIS
+            return `${proxyBaseUrl}/proxy/${encodeURIComponent(url)}`;
         }
 
         function loadJSON() {
