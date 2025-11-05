@@ -435,10 +435,11 @@
         let selectedImages = [];
         let isDragging = false;
 
-        // Direct URL loading (no proxy) - for testing
+        // Use CORS proxy service to bypass CORS restrictions
         function getProxiedUrl(url) {
-            // Return original URL directly
-            return url;
+            // Using a public CORS proxy service
+            const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+            return corsProxy + url;
         }
 
         function loadJSON() {
