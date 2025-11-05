@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Comparison Tool with Slider</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .image-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .image-option {
+            position: relative;
+            border: 3px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            aspect-ratio: 1;
+        }
+
+        .image-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-option.selected {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .image-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-option .record-id {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .image-option .selection-number {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .image-option.selected .selection-number {
+            display: flex;
+        }
+
+        .error-message {
+            background: #fee;
+            border: 2px solid #fcc;
+            color: #c33;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .info-message {
+            background: #e3f2fd;
+            border: 2px solid #90caf9;
+            color: #1565c0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .warning-message {
+            background: #fff3e0;
+            border: 2px solid #ffb74d;
+            color: #e65100;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        /* Slider Comparison Styles */
+        .comparison-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            background: #000;
+        }
+
+        .comparison-image-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .comparison-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .image-before {
+            z-index: 1;
+        }
+
+        .image-after {
+            z-index: 2;
+            clip-path: inset(0 0 0 50%);
+        }
+
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: white;
+            z-index: 3;
+            cursor: ew-resize;
+            transform: translateX(-50%);
+        }
+
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #667eea;
+            cursor: ew-resize;
+            user-select: none;
+        }
+
+        .slider-button::before {
+            content: '⟷';
+        }
+
+        .image-labels {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        .image-label {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+
+            .comparison-container {
+                height: 400px;
+            }
+
+            .image-selector {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🖼️ Image Comparison Tool with Slider</h1>
+            <p>Load JSON data, select a group, choose 2 images, and compare them with an interactive slider</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <div class="section-title">Step 1: Load JSON Data</div>
+                <textarea id="jsonInput" placeholder='Paste your JSON data here, e.g.:
+{
+  "group_1": [
+    {
+      "record_id": 1,
+      "image_url": "https://example.com/image1.jpg"
+    }
+  ]
+}'></textarea>
+                <button class="btn" onclick="loadJSON()" style="margin-top: 15px;">Load JSON</button>
+                <div id="loadError"></div>
+            </div>
+
+            <div id="controlsSection" style="display: none;">
+                <div class="section">
+                    <div class="section-title">Step 2: Select Group</div>
+                    <div class="controls">
+                        <div class="control-group">
+                            <label for="groupSelect">Choose a group to compare:</label>
+                            <select id="groupSelect" onchange="loadGroup()">
+                                <option value="">-- Select a group --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="imageSelectionSection" style="display: none;">
+                    <div class="section">
+                        <div class="section-title">Step 3: Select Exactly 2 Images to Compare</div>
+                        <div class="info-message">
+                            👆 Click on 2 images to select them for comparison. The slider will show Image 1 on the left and Image 2 on the right.
+                        </div>
+                        <div id="imageSelector" class="image-selector"></div>
+                    </div>
+
+                    <div class="section">
+                        <button class="btn" onclick="compareImages()" style="width: 100%;">Compare Selected Images</button>
+                        <div id="selectionWarning"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="comparisonSection" style="display: none;">
+                <div class="section">
+                    <div class="section-title">Image Comparison Slider</div>
+                    <div class="info-message">
+                        💡 <strong>Tip:</strong> Drag the slider left and right to compare the images. The white line separates the two images.
+                    </div>
+                    <div class="comparison-container" id="comparisonContainer">
+                        <div class="image-before comparison-image-wrapper">
+                            <img id="beforeImage" src="" alt="Before Image" crossorigin="anonymous">
+                        </div>
+                        <div class="image-after comparison-image-wrapper">
+                            <img id="afterImage" src="" alt="After Image" crossorigin="anonymous">
+                        </div>
+                        <div class="slider-handle" id="sliderHandle">
+                            <div class="slider-button"></div>
+                        </div>
+                        <div class="image-labels">
+                            <div class="image-label" id="beforeLabel">Image 1</div>
+                            <div class="image-label" id="afterLabel">Image 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let jsonData = null;
+        let currentGroup = null;
+        let selectedImages = [];
+        let isDragging = false;
+
+        // Direct URL loading (no proxy) - for testing
+        function getProxiedUrl(url) {
+            // Return original URL directly
+            return url;
+        }
+
+        function loadJSON() {
+            const input = document.getElementById('jsonInput').value.trim();
+            const errorDiv = document.getElementById('loadError');
+            
+            errorDiv.innerHTML = '';
+            
+            if (!input) {
+                errorDiv.innerHTML = '<div class="error-message">Please paste JSON data first.</div>';
+                return;
+            }
+
+            try {
+                jsonData = JSON.parse(input);
+                
+                if (typeof jsonData !== 'object' || Array.isArray(jsonData)) {
+                    throw new Error('JSON must be an object with groups');
+                }
+
+                const groupSelect = document.getElementById('groupSelect');
+                groupSelect.innerHTML = '<option value="">-- Select a group --</option>';
+                
+                Object.keys(jsonData).forEach(groupName => {
+                    const option = document.createElement('option');
+                    option.value = groupName;
+                    option.textContent = `${groupName} (${jsonData[groupName].length} images)`;
+                    groupSelect.appendChild(option);
+                });
+
+                document.getElementById('controlsSection').style.display = 'block';
+                errorDiv.innerHTML = '<div class="info-message">✅ JSON loaded successfully! Now select a group to compare.</div>';
+            } catch (e) {
+                errorDiv.innerHTML = `<div class="error-message">❌ Invalid JSON: ${e.message}</div>`;
+            }
+        }
+
+        function loadGroup() {
+            const groupName = document.getElementById('groupSelect').value;
+            
+            if (!groupName) {
+                document.getElementById('imageSelectionSection').style.display = 'none';
+                document.getElementById('comparisonSection').style.display = 'none';
+                return;
+            }
+
+            currentGroup = jsonData[groupName];
+            selectedImages = [];
+            
+            const imageSelector = document.getElementById('imageSelector');
+            imageSelector.innerHTML = '';
+
+            currentGroup.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'image-option';
+                div.onclick = () => toggleImageSelection(index);
+
+                const img = document.createElement('img');
+                img.src = getProxiedUrl(item.image_url);
+                img.alt = `Record ${item.record_id}`;
+                img.onerror = function() {
+                    // Show error placeholder if image fails to load
+                    this.src = 'data:image/svg+xml,' + encodeURIComponent(`
+                        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+                            <rect fill="#f0f0f0" width="200" height="200"/>
+                            <text x="50%" y="40%" text-anchor="middle" fill="#666" font-family="sans-serif" font-size="12">Image Load</text>
+                            <text x="50%" y="55%" text-anchor="middle" fill="#666" font-family="sans-serif" font-size="12">Error</text>
+                            <text x="50%" y="75%" text-anchor="middle" fill="#999" font-family="sans-serif" font-size="10">ID: ${item.record_id}</text>
+                        </svg>
+                    `);
+                };
+
+                const recordLabel = document.createElement('div');
+                recordLabel.className = 'record-id';
+                recordLabel.textContent = `ID: ${item.record_id}`;
+
+                const selectionNumber = document.createElement('div');
+                selectionNumber.className = 'selection-number';
+                selectionNumber.textContent = '';
+
+                div.appendChild(img);
+                div.appendChild(recordLabel);
+                div.appendChild(selectionNumber);
+                imageSelector.appendChild(div);
+            });
+
+            document.getElementById('imageSelectionSection').style.display = 'block';
+            document.getElementById('comparisonSection').style.display = 'none';
+            document.getElementById('selectionWarning').innerHTML = '';
+        }
+
+        function toggleImageSelection(index) {
+            const options = document.querySelectorAll('.image-option');
+            const option = options[index];
+            const selectionNumber = option.querySelector('.selection-number');
+
+            const existingIndex = selectedImages.indexOf(index);
+
+            if (existingIndex > -1) {
+                // Deselect
+                selectedImages.splice(existingIndex, 1);
+                option.classList.remove('selected');
+            } else {
+                // Select
+                if (selectedImages.length >= 2) {
+                    // Remove first selection
+                    const firstSelected = selectedImages.shift();
+                    options[firstSelected].classList.remove('selected');
+                }
+                selectedImages.push(index);
+                option.classList.add('selected');
+            }
+
+            // Update selection numbers
+            options.forEach((opt, idx) => {
+                const num = opt.querySelector('.selection-number');
+                const selIdx = selectedImages.indexOf(idx);
+                if (selIdx > -1) {
+                    num.textContent = selIdx + 1;
+                } else {
+                    num.textContent = '';
+                }
+            });
+
+            updateSelectionWarning();
+        }
+
+        function updateSelectionWarning() {
+            const warningDiv = document.getElementById('selectionWarning');
+            if (selectedImages.length === 0) {
+                warningDiv.innerHTML = '<div class="warning-message">⚠️ Please select 2 images to compare.</div>';
+            } else if (selectedImages.length === 1) {
+                warningDiv.innerHTML = '<div class="warning-message">⚠️ Please select 1 more image to compare.</div>';
+            } else {
+                warningDiv.innerHTML = '<div class="info-message">✅ 2 images selected! Click "Compare Selected Images" to view the comparison.</div>';
+            }
+        }
+
+        function compareImages() {
+            if (selectedImages.length !== 2) {
+                alert('Please select exactly 2 images to compare.');
+                return;
+            }
+
+            const image1 = currentGroup[selectedImages[0]];
+            const image2 = currentGroup[selectedImages[1]];
+
+            const beforeImg = document.getElementById('beforeImage');
+            const afterImg = document.getElementById('afterImage');
+            const beforeLabel = document.getElementById('beforeLabel');
+            const afterLabel = document.getElementById('afterLabel');
+
+            // Load images for comparison
+            beforeImg.src = getProxiedUrl(image1.image_url);
+            afterImg.src = getProxiedUrl(image2.image_url);
+
+            // Handle load errors
+            beforeImg.onerror = function() {
+                this.src = 'data:image/svg+xml,' + encodeURIComponent(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">
+                        <rect fill="#f8f8f8" width="400" height="400"/>
+                        <text x="50%" y="45%" text-anchor="middle" fill="#666" font-family="sans-serif" font-size="16">Failed to load</text>
+                        <text x="50%" y="55%" text-anchor="middle" fill="#666" font-family="sans-serif" font-size="16">Image 1</text>
+                        <text x="50%" y="70%" text-anchor="middle" fill="#999" font-family="sans-serif" font-size="12">ID: ${image1.record_id}</text>
+                    </svg>
+                `);
+            };
+            afterImg.onerror = function() {
+                this.src = 'data:image/svg+xml,' + encodeURIComponent(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">
+                        <rect fill="#f8f8f8" width="400" height="400"/>
+                        <text x="50%" y="45%" text-anchor="middle" fill="#666" font-family="sans-serif" font-size="16">Failed to load</text>
+                        <text x="50%" y="55%" text-anchor="middle" fill="#666" font-family="sans-serif" font-size="16">Image 2</text>
+                        <text x="50%" y="70%" text-anchor="middle" fill="#999" font-family="sans-serif" font-size="12">ID: ${image2.record_id}</text>
+                    </svg>
+                `);
+            };
+
+            beforeLabel.textContent = `Image 1 (ID: ${image1.record_id})`;
+            afterLabel.textContent = `Image 2 (ID: ${image2.record_id})`;
+
+            document.getElementById('comparisonSection').style.display = 'block';
+            document.getElementById('comparisonSection').scrollIntoView({ behavior: 'smooth' });
+
+            // Reset slider position
+            updateSliderPosition(50);
+        }
+
+        function updateSliderPosition(percentage) {
+            const slider = document.getElementById('sliderHandle');
+            const afterImage = document.querySelector('.image-after');
+            
+            slider.style.left = percentage + '%';
+            afterImage.style.clipPath = `inset(0 0 0 ${percentage}%)`;
+        }
+
+        // Slider drag functionality
+        const sliderHandle = document.getElementById('sliderHandle');
+        const comparisonContainer = document.getElementById('comparisonContainer');
+
+        sliderHandle.addEventListener('mousedown', () => {
+            isDragging = true;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        comparisonContainer.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            
+            const rect = comparisonContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percentage = (x / rect.width) * 100;
+            
+            if (percentage >= 0 && percentage <= 100) {
+                updateSliderPosition(percentage);
+            }
+        });
+
+        // Touch support for mobile
+        sliderHandle.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            e.preventDefault();
+        });
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        comparisonContainer.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            
+            const rect = comparisonContainer.getBoundingClientRect();
+            const x = e.touches[0].clientX - rect.left;
+            const percentage = (x / rect.width) * 100;
+            
+            if (percentage >= 0 && percentage <= 100) {
+                updateSliderPosition(percentage);
+            }
+        });
+    </script>
+</body>
+</html>
